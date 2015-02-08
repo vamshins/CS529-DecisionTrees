@@ -25,11 +25,17 @@ public class ID3 {
 			try {
 				trainingTxtFile = args[0];
 				validationTxtFile = args[1];
-				System.out.println("Please select confidence for chi square statistics : \n1)0%\n2)95%\n3)99%\n");
-				chiSquareSelect = Integer.parseInt(bufferRead.readLine());
-				System.out.println("Select the evaluation criteria : \n1)Information gain(entropy impurity)" + "\n2)accuracy(misclassification impurity)\n");
+				System.out.println("Please select one option : \n"
+									+ "1) Information Gain (Entropy Impurity Function) \n" 
+									+ "2) Accuracy (Misclassification Impurity Function) \n");
 				Constants.impurity_selection = Integer.parseInt(bufferRead.readLine());
 
+				System.out.println("Please select confidence for chi square statistics : \n"
+									+ "1) 0%  \n"
+									+ "2) 95% \n"
+									+ "3) 99% \n");
+				chiSquareSelect = Integer.parseInt(bufferRead.readLine());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -47,7 +53,7 @@ public class ID3 {
 
 			// Build Decision Tree
 			DecisionTreeUtil.buildTree(trainingExampleList, root);
-
+						
 			// Validate Training Set using the Decision Tree created above.
 			DecisionTreeUtil.validateDecisionTree(trainingTxtFile, root);
 

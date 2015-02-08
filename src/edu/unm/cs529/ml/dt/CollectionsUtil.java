@@ -17,7 +17,7 @@ public class CollectionsUtil {
 	 * Load each row of input file to 'Row' data structure and returns ArrayList of it.
 	 */
 	public static List<Row> getListOfExamples(String file) {
-		List<Row> records = new ArrayList<Row>();
+		List<Row> rows = new ArrayList<Row>();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			boolean firstRow = true;
@@ -34,7 +34,7 @@ public class CollectionsUtil {
 				} else {
 					record = new Row(line.substring(0, line.indexOf(" ")), 0); // '-' label represents 0
 				}
-				records.add(record);
+				rows.add(record);
 			}
 			System.out.println();
 			br.close();
@@ -44,7 +44,7 @@ public class CollectionsUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return records;
+		return rows;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class CollectionsUtil {
 	/**
 	 * Return 'class' (+ or -) which is majority in number
 	 */
-	public static int majorityClass(List<Row> rows) {
+	public static int getMajorityClass(List<Row> rows) {
 		Map<String, List<Row>> rowMap = getSortedMap(rows);
 		if (rowMap.get("+").size() > rowMap.get("-").size()) {
 			return 1; // '+'
@@ -79,9 +79,10 @@ public class CollectionsUtil {
 	}
 	
 	/**
-	 * Returns the index of an attribute which is going to be used as splitting node Takes in the records based on which decision has to be taken using information Gain value
+	 * Returns the index of an attribute which is going to be used as splitting node
+	 * Takes in the records based on which decision has to be taken using information Gain value
 	 */
-	public static int selectAttribute(List<Row> rows) {
+	public static int selectSplitAttribute(List<Row> rows) {
 		double infoGain = -99999999;
 		int splitAttrIndex = 0;
 		boolean fl = true;
@@ -94,7 +95,7 @@ public class CollectionsUtil {
 				splitAttrIndex = integer;
 				fl = false;
 			}
-			double ig = Entropy.informationGain(rows, integer);
+			double ig = EntropyUtil.calculateInformationGain(rows, integer);
 			if (ig > infoGain) {
 				infoGain = ig;
 				splitAttrIndex = integer;

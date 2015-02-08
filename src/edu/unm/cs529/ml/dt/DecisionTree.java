@@ -7,22 +7,22 @@ import java.util.List;
  * Object of this Class represents a node of the decision tree
  */
 class DecisionTree {
-	List<DecisionTree> nextNode;	// Array of Reference to child nodes
-	int attId;						// Attributeindex of Attribute used classify
-	String value;					// Class at Attribute at Attributeindex
-	int output;						// Output Label number, 1 for '+' and 0 for '-'
+	List<DecisionTree> nextNode;
+	int attrId;
+	String value;
+	int output;
 	public DecisionTree( int attId, String value) {
 		super();
 		nextNode = new ArrayList<DecisionTree>();
-		this.attId = attId;
+		this.attrId = attId;
 		this.value = value;
 		output = -1;
 	}
 	public int getAttId() {
-		return attId;
+		return attrId;
 	}
 	public void setAttId(int attId) {
-		this.attId = attId;
+		this.attrId = attId;
 	}
 	public String getValue() {
 		return value;
@@ -43,7 +43,7 @@ class DecisionTree {
 		this.output = value;
 	}
 	public String toString() {
-		return "DecisionNode [nextNode=" + nextNode + ", attId=" + attId
+		return "DecisionNode [nextNode=" + nextNode + ", attId=" + attrId
 				+ ", value=" + value + ", output=" + output + "]";
 	}	
 }
